@@ -12,8 +12,8 @@ Trabalho prático da disciplina de Plataforma de Desenvolvimento de Software, de
 ## ⚙️ Tecnologias Utilizadas
 * **Linguagem:** C# (.NET 8)
 * **Framework:** ASP.NET Core Web API
-* [cite_start]**ORM:** Entity Framework Core
-* [cite_start]**Banco de Dados:** SQLite
+* **ORM:** Entity Framework Core
+* **Banco de Dados:** SQLite
 
 ## 🗂️ Entidades do Sistema
 O domínio do problema conta com 8 entidades interligadas para garantir a coesão do sistema:
