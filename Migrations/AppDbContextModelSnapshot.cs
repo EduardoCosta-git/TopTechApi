@@ -59,19 +59,7 @@ namespace TopTechApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CategoriasPecas");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nome = "Placa-Mãe"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Nome = "Memória RAM"
-                        });
+                    b.ToTable("CategoriasPeca");
                 });
 
             modelBuilder.Entity("TopTechApi.Models.Cliente", b =>
@@ -150,7 +138,7 @@ namespace TopTechApi.Migrations
 
                     b.HasIndex("TecnicoId");
 
-                    b.ToTable("OrdensServicos");
+                    b.ToTable("OrdensServico");
                 });
 
             modelBuilder.Entity("TopTechApi.Models.Pagamento", b =>
@@ -237,20 +225,6 @@ namespace TopTechApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tecnicos");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Especialidade = "Hardware",
-                            Nome = "Carlos Silva"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Especialidade = "Redes e Software",
-                            Nome = "Ana Souza"
-                        });
                 });
 
             modelBuilder.Entity("OrdemServicoPeca", b =>

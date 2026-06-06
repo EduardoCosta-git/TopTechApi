@@ -1,19 +1,14 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
-#pragma warning disable CA1814 
-
 namespace TopTechApi.Migrations
 {
-
-    public partial class InitialCreate : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CategoriasPecas",
+                name: "CategoriasPeca",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -22,7 +17,7 @@ namespace TopTechApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoriasPecas", x => x.Id);
+                    table.PrimaryKey("PK_CategoriasPeca", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,9 +77,9 @@ namespace TopTechApi.Migrations
                 {
                     table.PrimaryKey("PK_Pecas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pecas_CategoriasPecas_CategoriaPecaId",
+                        name: "FK_Pecas_CategoriasPeca_CategoriaPecaId",
                         column: x => x.CategoriaPecaId,
-                        principalTable: "CategoriasPecas",
+                        principalTable: "CategoriasPeca",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -111,7 +106,7 @@ namespace TopTechApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrdensServicos",
+                name: "OrdensServico",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -124,15 +119,15 @@ namespace TopTechApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrdensServicos", x => x.Id);
+                    table.PrimaryKey("PK_OrdensServico", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrdensServicos_Computadores_ComputadorId",
+                        name: "FK_OrdensServico_Computadores_ComputadorId",
                         column: x => x.ComputadorId,
                         principalTable: "Computadores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrdensServicos_Tecnicos_TecnicoId",
+                        name: "FK_OrdensServico_Tecnicos_TecnicoId",
                         column: x => x.TecnicoId,
                         principalTable: "Tecnicos",
                         principalColumn: "Id",
@@ -150,9 +145,9 @@ namespace TopTechApi.Migrations
                 {
                     table.PrimaryKey("PK_OrdemServicoPeca", x => new { x.OrdensServicoId, x.PecasId });
                     table.ForeignKey(
-                        name: "FK_OrdemServicoPeca_OrdensServicos_OrdensServicoId",
+                        name: "FK_OrdemServicoPeca_OrdensServico_OrdensServicoId",
                         column: x => x.OrdensServicoId,
-                        principalTable: "OrdensServicos",
+                        principalTable: "OrdensServico",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -174,9 +169,9 @@ namespace TopTechApi.Migrations
                 {
                     table.PrimaryKey("PK_OrdemServicoServico", x => new { x.OrdensServicoId, x.ServicosId });
                     table.ForeignKey(
-                        name: "FK_OrdemServicoServico_OrdensServicos_OrdensServicoId",
+                        name: "FK_OrdemServicoServico_OrdensServico_OrdensServicoId",
                         column: x => x.OrdensServicoId,
-                        principalTable: "OrdensServicos",
+                        principalTable: "OrdensServico",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -202,29 +197,11 @@ namespace TopTechApi.Migrations
                 {
                     table.PrimaryKey("PK_Pagamentos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pagamentos_OrdensServicos_OrdemServicoId",
+                        name: "FK_Pagamentos_OrdensServico_OrdemServicoId",
                         column: x => x.OrdemServicoId,
-                        principalTable: "OrdensServicos",
+                        principalTable: "OrdensServico",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.InsertData(
-                table: "CategoriasPecas",
-                columns: new[] { "Id", "Nome" },
-                values: new object[,]
-                {
-                    { 1, "Placa-Mãe" },
-                    { 2, "Memória RAM" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Tecnicos",
-                columns: new[] { "Id", "Especialidade", "Nome" },
-                values: new object[,]
-                {
-                    { 1, "Hardware", "Carlos Silva" },
-                    { 2, "Redes e Software", "Ana Souza" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -243,13 +220,13 @@ namespace TopTechApi.Migrations
                 column: "ServicosId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdensServicos_ComputadorId",
-                table: "OrdensServicos",
+                name: "IX_OrdensServico_ComputadorId",
+                table: "OrdensServico",
                 column: "ComputadorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdensServicos_TecnicoId",
-                table: "OrdensServicos",
+                name: "IX_OrdensServico_TecnicoId",
+                table: "OrdensServico",
                 column: "TecnicoId");
 
             migrationBuilder.CreateIndex(
@@ -263,7 +240,6 @@ namespace TopTechApi.Migrations
                 column: "CategoriaPecaId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -282,10 +258,10 @@ namespace TopTechApi.Migrations
                 name: "Servicos");
 
             migrationBuilder.DropTable(
-                name: "OrdensServicos");
+                name: "OrdensServico");
 
             migrationBuilder.DropTable(
-                name: "CategoriasPecas");
+                name: "CategoriaPeca");
 
             migrationBuilder.DropTable(
                 name: "Computadores");
